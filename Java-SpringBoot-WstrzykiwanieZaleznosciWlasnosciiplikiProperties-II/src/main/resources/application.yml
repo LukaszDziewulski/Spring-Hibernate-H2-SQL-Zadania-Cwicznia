@@ -1,0 +1,6 @@
+spring:
+  profiles:
+    active: console
+app:
+  message:
+    decorator: LOWERCASE
