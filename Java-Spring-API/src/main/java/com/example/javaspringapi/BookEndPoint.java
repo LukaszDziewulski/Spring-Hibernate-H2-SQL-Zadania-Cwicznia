@@ -1,12 +1,19 @@
 package com.example.javaspringapi;
 
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+
 @RestController
-@RequestMapping("/api/books")
+@RequestMapping(value = "/api/books",
+        produces = {
+                MediaType.APPLICATION_XML_VALUE,
+                MediaType.APPLICATION_JSON_VALUE
+        }
+)
 public class BookEndPoint {
 
     @GetMapping
