@@ -1,5 +1,6 @@
-package com.example.apiarchitekturaaplikacji;
+package arch.company;
 
+import arch.joboffer.JobOffer;
 import org.springframework.stereotype.Service;
 
 @Service

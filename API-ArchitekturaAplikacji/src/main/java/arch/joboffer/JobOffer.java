@@ -1,5 +1,6 @@
-package com.example.apiarchitekturaaplikacji;
+package arch.joboffer;
 
+import arch.company.Company;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

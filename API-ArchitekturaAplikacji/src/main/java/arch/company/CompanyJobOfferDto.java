@@ -1,4 +1,4 @@
-package com.example.apiarchitekturaaplikacji;
+package arch.company;
 
 import lombok.Getter;
 import lombok.Setter;

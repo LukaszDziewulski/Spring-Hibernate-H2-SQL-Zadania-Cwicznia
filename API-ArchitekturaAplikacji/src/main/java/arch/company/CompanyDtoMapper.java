@@ -1,4 +1,4 @@
-package com.example.apiarchitekturaaplikacji;
+package arch.company;
 
 import org.springframework.stereotype.Service;
 
