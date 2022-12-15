@@ -1,11 +1,10 @@
 package arch.company;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -31,6 +30,16 @@ public class CompanyControler {
         }
         return ResponseEntity.ok(companyService.getJobOffersByCompanyId(id));
 
+    }
+
+    @PostMapping
+    ResponseEntity<CompanyDto> saveCompany(@RequestBody CompanyDto company){
+        CompanyDto savedCompany = companyService.saveCompany(company);
+        URI savedUri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(savedCompany.getId())
+                .toUri();
+        return ResponseEntity.created(savedUri).body(savedCompany);
     }
 
 }
