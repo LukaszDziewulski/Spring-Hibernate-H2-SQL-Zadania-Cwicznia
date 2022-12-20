@@ -21,5 +21,6 @@ public @interface NotBadWord {
     Class<? extends Payload>[] payload() default {};
 
 
+
     Lang[] lang() default Lang.PL;
 }
