@@ -13,7 +13,7 @@ public class EmailApplication {
         EmailMessage message = new EmailMessage(
                 "abc@abc.com",
                 "xyz@xyz.com",
-                "Hejo! Co tam  u Ciebie słychać wariacie? Pozdro"
+                "Hejo! Co tam  u Ciebie fak słychać wariacie? Pozdro"
         );
         emailService.sendMessage(message);
     }
