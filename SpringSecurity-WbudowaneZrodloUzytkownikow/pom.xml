@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>SpringSecurity-NiestandardowaKonfiguracjaWylogowania</artifactId>
+	<artifactId>SpringSecurity-WbudowaneZrodloUzytkownikow</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>SpringSecurity--Wprowadzenie</name>
 	<description>SpringSecurity--Wprowadzenie</description>
