@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>SpringSecurity-DostepDoKontekstuBezpieczenstwa</artifactId>
+	<artifactId>SpringSecurity-BezpiecznePrzechowywanieHasel</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>SpringSecurity--Wprowadzenie</name>
 	<description>SpringSecurity--Wprowadzenie</description>
@@ -17,6 +17,11 @@
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk15on</artifactId>
+			<version>1.70</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
