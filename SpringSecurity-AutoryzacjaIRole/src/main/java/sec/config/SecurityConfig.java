@@ -4,10 +4,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -16,11 +12,13 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(
                 request -> request
-                        .requestMatchers("/").permitAll()
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/user-panel/**").hasAuthority("ROLE_USER")
-                        .requestMatchers(HttpMethod.POST, "/calculate").hasAnyRole("USER","ADMIN")
-                        .anyRequest().authenticated()
+                        .mvcMatchers("/").permitAll() //  do strony glownej maja dostęp wszyscy
+                        .mvcMatchers("/img/**", "/styles/**").permitAll()
+                        .mvcMatchers("/secured").hasAnyRole("USER", "ADMIN")
+                        .mvcMatchers("/admin/**").hasRole("ADMIN") // Do wszystkich adresów rozpoczynających się od /admin/ mają dostęp tylko użytkownicy z rolą ADMIN
+//                        .mvcMatchers("/user-panel/**").hasAuthority("ROLE_USER") // Do wszystkich zasobów, których ścieżka rozpoczyna się od /user-panel/ dostęp mają tylko użytkownicy z rolą USER
+//                        .mvcMatchers(HttpMethod.POST, "/calculate").hasAnyRole("USER", "ADMIN") //Żądania POST wysyłane pod adres /calculate mogą wykonywać tylko użytkownicy z rolą USER, lub ADMIN
+                        .anyRequest().authenticated() //Wszystkie pozostałe żądania wymagają uwierzytelnienia z dowolną rolą.
         );
         http.formLogin(form -> form.loginPage("/login").permitAll());
         http.csrf().disable();  // wyłączenie filtra

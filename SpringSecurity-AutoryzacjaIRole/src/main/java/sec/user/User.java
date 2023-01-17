@@ -1,8 +1,8 @@
 package sec.user;
 
-import jakarta.persistence.*;
 import lombok.Data;
 
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 @Data

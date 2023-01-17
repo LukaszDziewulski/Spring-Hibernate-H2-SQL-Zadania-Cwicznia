@@ -7,18 +7,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import sec.message.WelcomeMessageService;
 
 @Controller
-public class HomeControler {
+public class SecuredController {
 
     WelcomeMessageService welcomeMessageService;
 
-    public HomeControler(WelcomeMessageService welcomeMessageService) {
+    public SecuredController(WelcomeMessageService welcomeMessageService) {
         this.welcomeMessageService = welcomeMessageService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/secured")
     String home(@RequestParam(defaultValue =  "en")String lang, Model model) {
         String welcomeMessage = welcomeMessageService.getWelcomeMessage(lang);
         model.addAttribute("welcomeMessage",welcomeMessage);
-        return "index";
+        return "secured";
     }
 }
