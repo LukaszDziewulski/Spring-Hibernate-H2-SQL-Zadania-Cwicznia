@@ -21,6 +21,7 @@ class SecurityConfig {
                 .mvcMatchers("/register", "/confirmation").permitAll()
                 .mvcMatchers("/secured", "/change-password").hasAnyRole("USER", "ADMIN")
                 .mvcMatchers("/admin/**").hasRole("ADMIN")
+                .mvcMatchers("/swagger-ui.html", "/swagger-ui/**", "/v2/api-docs").permitAll()
                 .anyRequest().authenticated()
         );
         http.formLogin(login -> login.loginPage("/login").permitAll());
