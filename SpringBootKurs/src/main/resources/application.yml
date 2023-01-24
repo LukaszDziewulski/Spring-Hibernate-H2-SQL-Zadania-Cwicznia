@@ -6,8 +6,11 @@ spring:
     url: jdbc:h2:mem:test
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: validate
     show-sql: true
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+server:
+  error:
+    include-message: always

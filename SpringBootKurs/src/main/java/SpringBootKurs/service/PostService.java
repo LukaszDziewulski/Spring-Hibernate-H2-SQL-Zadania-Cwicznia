@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,7 +35,7 @@ public class PostService {
 
     public List<Post> getPostWithComments(int page, Sort.Direction sort) {
         List<Post> allPosts = postRepository.findAllPost(PageRequest.of(page, PAGE_SIZE,   // stronicowanie
-                Sort.by(sort,"id")));  // sortowanie
+                Sort.by(sort, "id")));  // sortowanie
         List<Long> ids = allPosts.stream()
                 .map(Post::getId)
                 .collect(Collectors.toList());
@@ -43,9 +44,26 @@ public class PostService {
         return allPosts;
     }
 
-    private List<Comment> extractComments(List<Comment> comments, long id) {
+    private List<Comment> extractComments(List<Comment> comments, Long id) {
         return comments.stream()
                 .filter(comment -> comment.getPostId() == id)
                 .collect(Collectors.toList());
+    }
+
+    public Post addPost(Post post) {
+        return postRepository.save(post);
+    }
+
+    @Transactional
+    public Post editPost(Post post) {
+        Post postEdited = postRepository.findById(post.getId()).orElseThrow();
+        postEdited.setTitle(post.getTitle());
+        postEdited.setContent(post.getContent());
+        return postEdited;
+    }
+
+
+    public void deletePost(Long id) {
+        postRepository.deleteById(id);
     }
 }
