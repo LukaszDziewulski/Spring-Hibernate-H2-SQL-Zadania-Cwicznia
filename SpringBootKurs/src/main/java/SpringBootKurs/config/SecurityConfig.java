@@ -23,7 +23,7 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(authz -> authz
                 .antMatchers("/login").permitAll()
-                        .requestMatchers(PathRequest.toH2Console()).permitAll() // dostep do h2
+//                        .requestMatchers(PathRequest.toH2Console()).permitAll() // dostep do h2
                 .anyRequest().authenticated())
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -32,7 +32,7 @@ public class SecurityConfig {
 
 
         http.exceptionHandling().authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)); //wskazywanie nablad 401
-        http.headers().frameOptions().sameOrigin(); // zaladowanie h2 w ramkach
+//        http.headers().frameOptions().sameOrigin(); // zaladowanie h2 w ramkach
         return http.build();
     }
 

@@ -1,19 +1,26 @@
 spring:
-  h2:
-    console:
-      enabled: true
   datasource:
-    url: jdbc:h2:mem:test
+    url: jdbc:mysql://localhost:3306/springkurs?useUnicode=true&serverTimezone=UTC
+    username: root
+    password: admin
+
+
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: none
     show-sql: true
+
+
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+
+
   cache:
     jcache:
       config: classpath:ehcache.xml
+
+
   liquibase:
     change-log: classpath:liquibase-changeLog.xml
 
