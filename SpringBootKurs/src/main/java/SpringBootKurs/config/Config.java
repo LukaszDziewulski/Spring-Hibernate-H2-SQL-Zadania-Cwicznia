@@ -1,5 +1,6 @@
 package SpringBootKurs.config;
 
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -18,8 +19,9 @@ import java.util.Collections;
 import java.util.List;
 
 @EnableSwagger2
+@EnableCaching
 @Configuration
-public class ConfigSwagger {
+public class Config {
 
     private static final String API_TITLE = "SpringBootKurs api";
     private static final String VERSION = "v0.0.1";

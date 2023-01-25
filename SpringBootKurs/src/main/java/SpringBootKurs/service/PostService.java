@@ -5,15 +5,16 @@ import SpringBootKurs.model.Post;
 import SpringBootKurs.repository.CommentRepository;
 import SpringBootKurs.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -28,11 +29,13 @@ public class PostService {
                         Sort.by(sort, "id"))); // sortowanie
     }
 
+    @Cacheable(cacheNames = "SinglePost", key = "#id")
     public Post getSinglePost(long id) {
         return postRepository.findById(id)
                 .orElseThrow();
     }
 
+    @Cacheable(cacheNames = "PostWithComments")
     public List<Post> getPostWithComments(int page, Sort.Direction sort) {
         List<Post> allPosts = postRepository.findAllPost(PageRequest.of(page, PAGE_SIZE,   // stronicowanie
                 Sort.by(sort, "id")));  // sortowanie
@@ -55,6 +58,7 @@ public class PostService {
     }
 
     @Transactional
+    @CachePut(cacheNames = "SinglePost", key = "#result")   // edytuje dane w cache automatycznie przeładowane na nowe
     public Post editPost(Post post) {
         Post postEdited = postRepository.findById(post.getId()).orElseThrow();
         postEdited.setTitle(post.getTitle());
@@ -62,7 +66,7 @@ public class PostService {
         return postEdited;
     }
 
-
+    @CacheEvict(cacheNames = "SinglePost") // automatyczne usuniecie z cache posta po wykonaniu deleta
     public void deletePost(Long id) {
         postRepository.deleteById(id);
     }

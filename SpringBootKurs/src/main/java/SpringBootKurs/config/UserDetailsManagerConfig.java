@@ -16,8 +16,8 @@ public class UserDetailsManagerConfig {
 
     @Bean
     public InMemoryUserDetailsManager userDetailsManager() {
-        UserDetails user = User.withUsername("user")
-                .password(passwordEncoder.encode("sekret1"))
+        UserDetails user = User.withUsername("test")
+                .password(passwordEncoder.encode("test"))
                 .roles("USER")
                 .build();
         UserDetails admin = User.withUsername("admin")
