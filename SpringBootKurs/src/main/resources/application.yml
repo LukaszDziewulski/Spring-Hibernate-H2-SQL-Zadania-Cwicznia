@@ -11,8 +11,15 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+  cache:
+    jcache:
+      config: classpath:ehcache.xml
+  liquibase:
+    change-log: classpath:liquibase-changeLog.xml
 
 
 server:
   error:
     include-message: always
+
+
