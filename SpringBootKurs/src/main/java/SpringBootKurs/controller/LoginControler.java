@@ -27,6 +27,6 @@ public class LoginControler {
                 loginRequest.getPassword());
         authenticationManager.authenticate(authentication);
 
-        return new TokenResponse(tokenService.generateToken(loginRequest.getUsername()));
+        return new TokenResponse(tokenService.generateToken(loginRequest.getUsername()));  //zwraca tokena dzieki ktoremu mozemy wykonywac pozostale endpointsy
     }
 }

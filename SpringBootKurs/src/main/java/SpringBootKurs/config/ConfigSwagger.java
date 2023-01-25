@@ -21,7 +21,7 @@ import java.util.List;
 @Configuration
 public class ConfigSwagger {
 
-    private static final String API_TITLE = "eFarm API";
+    private static final String API_TITLE = "SpringBootKurs api";
     private static final String VERSION = "v0.0.1";
     private static final String AUTHORIZATION_SCOPE_NAME = "global";
     private static final String API_KEY_JWT = "JWT";
@@ -31,11 +31,11 @@ public class ConfigSwagger {
     @Bean
     Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("EFarm api")
+                .groupName("SpringBootKurs api")
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.any())
-                .paths(PathSelectors.any())
+                .paths(PathSelectors.regex ("^(?!/(error).*$).*$")) // wyłącznie errorów na swaggerze
                 .build()
                 .securitySchemes(List.of(apiKey()))
                 .securityContexts(Collections.singletonList(securityContext()));
