@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class PostService {
-    private final static int PAGE_SIZE = 2;  //jeden na strone
+    private final static int PAGE_SIZE = 20;  //jeden na strone
     private final PostRepository postRepository;
     private final CommentRepository commentRepository;
 

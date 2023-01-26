@@ -12,7 +12,7 @@ public class PostDtoMapper {
 
     public static List<PostDto> mapToPostDtos(List<Post> posts) {
         return posts.stream()
-                .map(post -> mapToPostDto(post))
+                .map(PostDtoMapper::mapToPostDto)
                 .collect(Collectors.toList());
     }
 
