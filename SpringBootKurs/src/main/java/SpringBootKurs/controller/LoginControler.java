@@ -6,21 +6,17 @@ import SpringBootKurs.service.TokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/login")
 @RequiredArgsConstructor
 public class LoginControler {
 
     private final AuthenticationManager authenticationManager;
     private final TokenService tokenService;
 
-    @PostMapping
+    @PostMapping("/login")
     public TokenResponse login(@RequestBody LoginRequest loginRequest) {
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                 loginRequest.getUsername(),
@@ -28,5 +24,10 @@ public class LoginControler {
         authenticationManager.authenticate(authentication);
 
         return new TokenResponse(tokenService.generateToken(loginRequest.getUsername()));  //zwraca tokena dzieki ktoremu mozemy wykonywac pozostale endpointsy
+    }
+
+    @GetMapping("/secured")
+    public String secured(){
+        return "secured";
     }
 }
